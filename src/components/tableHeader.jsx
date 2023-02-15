@@ -16,7 +16,6 @@ const TableHeader = ({ onSort, selectedSort, columns }) => {
 
   const renderActiveArrow = (item) => {
     if (selectedSort.path === item) {
-      console.log(item);
       return <ActiveArrow order={selectedSort.order} />;
     } else {
       return "";

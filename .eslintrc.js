@@ -12,6 +12,8 @@ module.exports = {
   plugins: ["react"],
   rules: {
     semi: [2, "always"],
+    // requireMultiLineTernary: [2],
+    // multilineTernary: ["error", "never"],
     quotes: ["error", "double", { allowTemplateLiterals: true }],
     "space-before-function-paren": [
       "error",
