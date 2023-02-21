@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 import React, { useState, useEffect } from "react";
 import Pagination from "./pagination";
 import { paginate } from "../utils/paginate";
@@ -13,6 +14,7 @@ const Users = () => {
   const [professions, setProfession] = useState();
   const [selectedProf, setSelectedProf] = useState();
   const [sortBy, setSortBy] = useState({ path: "name", order: "asc" });
+  const [searchUser, setSearchUser] = useState("");
 
   const pageSize = 8;
 
@@ -46,6 +48,7 @@ const Users = () => {
   }, [selectedProf]);
 
   const handleProfessionSelect = (item) => {
+    setSearchUser("");
     setSelectedProf(item);
   };
 
@@ -57,10 +60,22 @@ const Users = () => {
     setSortBy(item);
   };
 
+  const handleSearchUser = (e) => {
+    setSearchUser(e.target.value);
+  };
+
+  const searchChange = !searchUser
+    ? undefined
+    : users.filter((user) =>
+        user.name.toLowerCase().includes(searchUser.toLowerCase())
+      );
+
   if (users) {
-    const filteredUsers = selectedProf
-      ? users.filter((user) => user.profession._id === selectedProf._id)
-      : users;
+    const filteredUsers =
+      searchChange ||
+      (selectedProf
+        ? users.filter((user) => user.profession._id === selectedProf._id)
+        : users);
 
     const count = filteredUsers.length;
 
@@ -87,6 +102,12 @@ const Users = () => {
         )}
         <div className="d-flex flex-column">
           <SearchStatus length={count} />
+          <input
+            type="text"
+            placeholder="Search......"
+            onChange={handleSearchUser}
+            value={searchUser}
+          />
           {count > 0 && (
             <UserTable
               users={userCrop}
