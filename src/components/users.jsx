@@ -7,8 +7,6 @@ import SearchStatus from "./searchStatus";
 import UserTable from "./usersTable";
 import _ from "lodash";
 import PropTypes from "prop-types";
-// import UserPage from "./userPage";
-// import { useHistory } from "react-router-dom";
 
 const Users = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -111,7 +109,7 @@ const Users = () => {
     );
   }
 
-  return "loading.......";
+  return "Loading.......";
 };
 
 Users.propTypes = { users: PropTypes.array };
