@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import ActiveArrow from "./activeArrow";
+import ActiveArrow from "../../activeArrow";
 
 const TableHeader = ({ onSort, selectedSort, columns }) => {
   const handleSort = (item) => {

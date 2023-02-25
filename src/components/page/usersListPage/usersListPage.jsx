@@ -1,15 +1,15 @@
 /* eslint-disable indent */
 import React, { useState, useEffect } from "react";
-import Pagination from "./pagination";
-import { paginate } from "../utils/paginate";
-import GroupList from "./groupList";
-import api from "../api";
-import SearchStatus from "./searchStatus";
-import UserTable from "./usersTable";
+import Pagination from "../../common/pagination";
+import { paginate } from "../../../utils/paginate";
+import GroupList from "../../common/groupList";
+import api from "../../../api";
+import SearchStatus from "../../ui/searchStatus";
+import UsersTable from "../../ui/usersTable";
 import _ from "lodash";
 import PropTypes from "prop-types";
 
-const Users = () => {
+const UsersListPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [professions, setProfession] = useState();
   const [selectedProf, setSelectedProf] = useState();
@@ -109,7 +109,7 @@ const Users = () => {
             value={searchUser}
           />
           {count > 0 && (
-            <UserTable
+            <UsersTable
               users={userCrop}
               onSort={handleSort}
               selectedSort={sortBy}
@@ -133,6 +133,6 @@ const Users = () => {
   return "Loading.......";
 };
 
-Users.propTypes = { users: PropTypes.array };
+UsersListPage.propTypes = { users: PropTypes.array };
 
-export default Users;
+export default UsersListPage;
