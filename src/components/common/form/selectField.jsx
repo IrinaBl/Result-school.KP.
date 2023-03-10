@@ -7,6 +7,7 @@ const SelectField = ({
   onChange,
   defaultOption,
   options,
+  name,
   error
 }) => {
   const handleChange = ({ target }) => {
@@ -19,31 +20,28 @@ const SelectField = ({
 
   const optionsArray =
     !Array.isArray(options) && typeof options === "object"
-      ? Object.keys(options).map((optionName) => ({
-          name: options[optionName].name,
-          value: options[optionName]._id
-        }))
+      ? Object.values(options)
       : options;
 
   return (
     <div className="mb-4">
-      <label htmlFor="validationCustom04" className="form-label">
+      <label htmlFor={name} className="form-label">
         {label}
       </label>
       <select
         className={getInputClasses()}
-        id="validationCustom04"
-        name="profession"
+        id={name}
+        name={name}
         value={value}
         onChange={handleChange}
       >
         <option disabled value="">
-          Choose...
+          {defaultOption}
         </option>
-        {optionsArray &&
+        {optionsArray.length > 0 &&
           optionsArray.map((option) => (
             <option value={option.value} key={option.value}>
-              {option.name}
+              {option.label}
             </option>
           ))}
       </select>
@@ -54,6 +52,7 @@ const SelectField = ({
 
 SelectField.propTypes = {
   label: PropTypes.string,
+  name: PropTypes.string,
   value: PropTypes.string,
   onChange: PropTypes.func,
   error: PropTypes.string,

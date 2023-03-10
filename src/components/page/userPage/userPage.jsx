@@ -13,7 +13,7 @@ const UserPage = () => {
 
   useEffect(() => {
     api.users.default.getById(userId).then((data) => setUser(data));
-  });
+  }, []);
 
   const handleAllUsers = () => {
     history.push("/users");
