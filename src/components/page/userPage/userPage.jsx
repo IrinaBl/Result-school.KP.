@@ -1,40 +1,43 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { useParams, useHistory } from "react-router-dom";
 import api from "../../../api";
-import QualitiesList from "../../ui/qualities/qualitiesList";
+import Qualities from "../../ui/qualities";
+import { useHistory } from "react-router-dom";
 
-const UserPage = () => {
-  const params = useParams();
-  const userId = params.userId;
-
+const UserPage = ({ userId }) => {
   const history = useHistory();
   const [user, setUser] = useState();
 
   useEffect(() => {
-    api.users.default.getById(userId).then((data) => setUser(data));
+    api.users.getById(userId).then((data) => setUser(data));
   }, []);
 
-  const handleAllUsers = () => {
-    history.push("/users");
+  const handleClick = () => {
+    history.push(`/users/${user._id}/edit`);
   };
 
   if (user) {
     return (
-      <div key={userId}>
-        <h1>{user.name}</h1>
-        <h3>Профессия: {user.profession.name}</h3>
-        <QualitiesList qualities={user.qualities} />
-        <h3>Встречался раз: {user.completedMeetings}</h3>
-        <h3>Оценка: {user.rate}/5</h3>
-        <button onClick={handleAllUsers}>Все пользователи</button>
+      <div className="ms-3">
+        <h1> {user.name}</h1>
+        <h2>Профессия: {user.profession.name}</h2>
+        <Qualities qualities={user.qualities} />
+        <p>completedMeetings: {user.completedMeetings}</p>
+        <h2>Rate: {user.rate}</h2>
+        <button onClick={handleClick}> Изменить</button>
+      </div>
+    );
+  } else {
+    return (
+      <div className="container mt-5 shadow p-4">
+        <h1>Loading...</h1>
       </div>
     );
   }
 };
 
 UserPage.propTypes = {
-  userId: PropTypes.string
+  userId: PropTypes.string.isRequired
 };
 
 export default UserPage;

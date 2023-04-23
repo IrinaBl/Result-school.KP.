@@ -17,13 +17,13 @@ const MultiSelectField = ({ options, onChange, name, label, defaultValue }) => {
       <label className="form-label">{label}</label>
       <Select
         isMulti
+        closeMenuOnSelect={false}
+        defaultValue={defaultValue}
         options={optionsArray}
         className="basic-multi-select"
         classNamePrefix="select"
         onChange={handleChange}
         name={name}
-        closeMenuOnSelect={false}
-        defaultValue={defaultValue}
       />
     </div>
   );

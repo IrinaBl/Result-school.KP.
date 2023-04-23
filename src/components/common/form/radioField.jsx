@@ -17,10 +17,10 @@ const RadioField = ({ options, name, onChange, value, label }) => {
             <input
               className="form-check-input"
               type="radio"
+              value={option.value}
               name={name}
               id={option.name + "_" + option.value}
               checked={option.value === value}
-              value={option.value}
               onChange={handleChange}
             />
             <label

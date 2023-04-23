@@ -31,8 +31,8 @@ const SelectField = ({
       <select
         className={getInputClasses()}
         id={name}
-        name={name}
         value={value}
+        name={name}
         onChange={handleChange}
       >
         <option disabled value="">
